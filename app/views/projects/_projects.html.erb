@@ -1,0 +1,20 @@
+<% obj.each do |project|%>
+    <div class="row">
+        <div class="col-md-2" style="background-color= #454545">
+            <section class="center">
+
+            </section>    
+        </div>
+        <div class="col-md-8 well">
+            <h4><%= link_to project.name, project_path(project)%></h4>
+            <p><%= truncate(project.description, length: 150)%></p>
+            <p>
+                <span class="quite">
+                    <small>Created <%= time_ago_in_words(project.created_at)%> ago by 
+                                    <%= project.user.email.capitalize%>| 
+                </span>
+            </p>
+        </div>
+    </div>
+    
+<%end%>

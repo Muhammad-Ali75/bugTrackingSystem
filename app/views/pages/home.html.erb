@@ -1,0 +1,19 @@
+<div class="p-5 text-center bg-image rounded-3 center" style="
+    background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+    height: 400px;
+  ">
+  <div class="mask" >
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="text-white">
+        <h1 class="mb-3">Welcome to Bug Tracking App</h1>
+        <h4 class="mb-3">The best Bug Tracking App!</h4>
+        <br>
+        <br>
+        <br>
+        <% if !current_user%>
+        <%= link_to "SignIn", new_user_registration_path, class: "btn btn-outline-light btn-lg" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
