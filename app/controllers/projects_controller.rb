@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
           if current_user.user_type == "2"
             @projects = current_user.assigned_projects 
           end
+        #   binding.pry 
    end
     def new
         @project = Project.new
