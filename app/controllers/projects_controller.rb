@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
    before_action :set_project, only: [:show, :edit, :update, :destroy]
     
    def index
+    if current_user
         if current_user.user_type == "0"
             @projects = current_user.projects 
           end
@@ -11,6 +12,9 @@ class ProjectsController < ApplicationController
           if current_user.user_type == "2"
             @projects = current_user.assigned_projects 
           end
+    else
+     redirect_to root_path
+    end   
         #   binding.pry 
    end
     def new

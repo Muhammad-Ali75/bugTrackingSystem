@@ -1,3 +1,45 @@
 <h1 style="text-align:center">List of All Projects</h1>
 <hr>
+<p style="color: green"><%= notice %></p>
+<center>
+<% if current_user.user_type == "0" %>
+
+  <% if @projects.count != 0 %>
 <%= render "projects", objects: @projects %>
+
+  <% else %>
+      <p>You have not created any projects yet</p>
+  <% end %>
+
+
+  <%= link_to "New project", new_project_path, class: "btn btn-outline-dark btn-lg"  %>
+
+  <% end %>
+
+<% if current_user.user_type == "1" %>
+
+  <h1>Your Assigned Project to develop</h1>
+
+  <% if @projects.count != 0 %>
+<%= render "projects", objects: @projects %>
+
+  <% else %>
+      <p>You have not been assigned to any project to develop</p>
+  <% end %>
+
+  <% end %>
+
+<%  if current_user.user_type == "2"  %>
+
+<h1>Your Assigned Project to Assure Quality</h1>
+
+  <% if @projects.count != 0 %>
+
+<%= render "projects", objects: @projects %>
+  <% else %>
+      <p>You have not been assigned to any project to assure quality</p>
+  <% end %>
+
+<% end %>
+
+</center>
