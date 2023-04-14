@@ -10,4 +10,6 @@ class User < ApplicationRecord
   has_many :user_projects
   has_many :assigned_projects, :through=>  :user_projects, :source=> :project
 
+  has_many :tickets
+
 end

@@ -1,0 +1,53 @@
+<center>
+<h1 align="center" >Ticket Name: <%= @ticket.title.capitalize%></h1>
+<h3 align="center" >Status:</h3>
+<% if @ticket.status == 0%>
+        <h4 class="text-primary">New</h4>
+<% elsif @ticket.status == 1 %>
+    <h4 class="text-warning">Started</h4>
+<% elsif @ticket.status == 2 and @ticket.category = 0 %>
+    <h4 class="text-success">Resolved</h4>
+<%else%>
+    <h4 class="text-success">Completed</h4>
+<%end%>
+<div class="well col-md-8 col-md-offset-2" align="center"> 
+    <h4 class="center description"><strong>Description:</strong></h4>
+    <hr/>
+    <%= @ticket.description %>
+    <%# <% if @recipe.ingredients.any? %>
+        <%# <>Ingredients: <%= render @recipe.ingredients %>
+    <%# <% end %>
+
+<br>
+<br>
+
+    <p>
+        Created by: 
+        <small>
+            <%= @ticket.user.email%>
+        </small>
+        <div class="pull-right">
+            Created: <%= time_ago_in_words(@ticket.created_at)%>
+        </div>
+   </p>
+   <div class="recipe-actions" align="center">
+   <% if current_user == @ticket.user || current_user.user_type =="2"%>
+   <br>
+    <%= link_to "Edit this BUG", edit_ticket_path(@ticket), class: "btn btn-xs btn-warning"%>
+    <br>
+    <%end%>
+     <% if current_user == @ticket.user %>
+    <br>
+    <%= button_to "Delete this BUG", ticket_path(@ticket),  method: :delete, class: "btn btn-xs btn-danger"%>
+    <%end%>
+    <br>
+    <% if current_user.user_type != "0"%>
+    <%= link_to "Go to Bugs", tickets_path(id: @ticket.project.id), class: "btn btn-xs btn-warning"%>
+    <br>
+    <%end%>
+    <br>
+    <%= link_to "Go to Projects", projects_path, class: "btn btn-xs btn-primary"%>
+
+   </div>
+</div>
+</center>

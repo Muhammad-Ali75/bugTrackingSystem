@@ -1,0 +1,39 @@
+<h1 style="text-align:center">List of All Bugs</h1>
+<hr>
+<p style="color: green"><%= notice %></p>
+<center>
+<% if current_user.user_type == "0" %>
+    <% if @tickets.count != 0 %>
+        <%= render "tickets", objects: @tickets %>
+
+      <% else %>
+        <p>No Bugs yet reported</p>
+
+      <% end %>
+<%end%>
+<% if current_user.user_type == "1" %>
+    <%= link_to "Create Bug", new_ticket_path(id: @project), class: "btn btn-xs btn-primary"%>
+    <br>
+    <br>
+  <% if @tickets.count != 0 %>
+<%= render "tickets", objects: @tickets %>
+
+  <% else %>
+      <p>No Bugs reported</p>
+
+  <% end %>
+
+  <% end %>
+
+<%  if current_user.user_type == "2"  %>
+
+ <% if @tickets.count != 0 %>
+<%= render "tickets", objects: @tickets %>
+ <% else %>
+      <p>No Bugs reported</p>
+
+  <% end %>
+
+<% end %>
+
+</center>

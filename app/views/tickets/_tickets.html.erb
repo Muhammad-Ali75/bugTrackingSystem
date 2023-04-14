@@ -1,0 +1,28 @@
+<%  objects.each do |ticket|%>
+    <div class="row border border-info rounded w-25 p-3" style="margin-bottom: 10px">
+        <div class="col-md-2" style="background-color= #454545">
+            <section class="center">
+
+            </section>    
+        </div>
+        <div class="col-md-8 well">
+            <h4><%= link_to ticket.title, ticket_path(ticket)%></h4>
+            <% if ticket.status == 0%>
+               <h6>Status:</h6><h6 class="text-primary">New</h6>
+            <% elsif ticket.status == 1 %>
+                <h6>Status:</h6><h6 class="text-warning">Started</h6>
+            <% elsif ticket.status == 2 and ticket.category = 0 %>
+                <h6>Status:</h6><h6 class="text-success">Resolved</h6>
+            <%else%>
+                <h6>Status:</h6><h6 class="text-success">Completed</h6>
+            <%end%>
+            <p>
+                <span class="quite">
+                    <small>Created <%= time_ago_in_words(ticket.created_at)%> ago by 
+                                    <%# <%= ticket.user.email.capitalize%> 
+                </span>
+            </p>
+        </div>
+    </div>
+    
+<%end%>
