@@ -76,3 +76,4 @@ end
 gem 'devise', github: 'heartcombo/devise', branch: 'main'
 gem 'simple_form', '~> 5.2'
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
+gem 'cancancan'

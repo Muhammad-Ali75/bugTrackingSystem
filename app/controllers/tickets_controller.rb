@@ -1,4 +1,6 @@
 class TicketsController < ApplicationController
+
+
  def index
     @tickets= Project.find(params[:id]).tickets
     @project=params[:id]
