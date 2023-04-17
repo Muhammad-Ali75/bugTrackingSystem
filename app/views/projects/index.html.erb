@@ -3,7 +3,10 @@
 <p style="color: green"><%= notice %></p>
 <center>
 <% if current_user.user_type == "0" %>
-
+  <%= link_to "New project", new_project_path, class: "btn btn-outline-dark btn-lg"  %>   
+  <br>
+  <br>
+ 
   <% if @projects.count != 0 %>
 <%= render "projects", objects: @projects %>
 
@@ -12,7 +15,6 @@
   <% end %>
 
 
-  <%= link_to "New project", new_project_path, class: "btn btn-outline-dark btn-lg"  %>
 
   <% end %>
 

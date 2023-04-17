@@ -1,7 +1,8 @@
 <center>
 <h1 align="center">Create new Project</h1>
 <hr>
-<div class="col-md-12">
+<%= render 'shared/errors', obj: @project %>
+<div class="col-md-12 w-50 p-3">
     <%= form_for(@project, :html => {class:"form-horizontal", role: "form"}) do |f| %>
         <div class="form-group">
             <div class="control-label col-md-2">
@@ -15,12 +16,16 @@
             <div class="control-label col-md-2">
                 <%= f.label :description %>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <%= f.text_area :description, rows: 10, class: "form-control", placeholder: "Enter description of project" %>
 
             </div>
         </div>
         <br>
+
+<br>
+
+
         <br>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

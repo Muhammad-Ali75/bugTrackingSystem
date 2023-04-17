@@ -1,7 +1,7 @@
 <center>
 <h1 align="center">Edit Project</h1>
 <hr>
-<div class="col-md-12">
+<div class="col-md-12 w-50 p-3">
     <%= form_for(@project, :html => {class:"form-horizontal", role: "form"}) do |f| %>
         <div class="form-group">
             <div class="control-label col-md-2">
@@ -15,7 +15,7 @@
             <div class="control-label col-md-2">
                 <%= f.label :description %>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <%= f.text_area :description, rows: 10, class: "form-control", placeholder: "Enter project details" %>
 
             </div>
@@ -25,9 +25,10 @@
 <strong> Add QA </strong>
 <% if !@project.new_record? %>
 <div class="row">
-    <%= f.collection_check_boxes :user_ids, User.where(user_type: 1), :id, :name  do | cb | %>
-      <% cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text} %>
-    <% end %>
+    <%# <%= f.collection_check_boxes :user_ids, User.where(user_type: 1), :id, :name  do | cb | %>
+      <%# <% cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text} %>
+    <%# <% end %> 
+  <%= f.select :user_ids, options_from_collection_for_select(User.where(user_type: 1), :id, :name), {}, class: "multiselect", multiple: true %>
 
    
   </div>
@@ -37,12 +38,15 @@
 <strong> Add developer  </strong>
 
 <% if !@project.new_record? %>
+  <%# <%= f.collection_select :user_ids, User.where(user_type: 2), :id, :name, {}, {multiple: true} %> 
 <div class="row">
-    <%= f.collection_check_boxes :user_ids, User.where(user_type: 2), :id, :name  do | cb | %>
-      <% cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text} %>
-    <% end %>
-   
+  <%= f.select :user_ids, options_from_collection_for_select(User.where(user_type: 2), :id, :name), {}, class: "multiselect", multiple: true %>
+    <%# <%= f.collection_check_boxes :user_ids, User.where(user_type: 2), :id, :name  do | cb | %>
+      <%# <% cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text} %>
+    <%# <% end %> 
+  
   </div>
+   <br>
 <%end%>
 
 

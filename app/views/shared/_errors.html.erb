@@ -1,0 +1,22 @@
+<% if obj.errors.any? %>
+  <div class="row w-50 p-3 bg-warning  border border-danger rounded">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h6 class="panel-title">
+            <%# <%binding.pry%>
+            <%= pluralize(obj.errors.count, "error") %>
+            prohibited this <%= obj.class %> from being saved:
+          </h6>
+          <div class="panel-body">
+            <ul>
+              <% obj.errors.full_messages.each do |msg| %>
+                <li class="text-danger"><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>  
+      </div>
+    </div>
+  </div>
+<% end %>

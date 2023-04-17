@@ -1,5 +1,5 @@
 <center>
-<h1 align="center" >Ticket Name: <%= @ticket.title.capitalize%></h1>
+<h1 align="center" >Bug name: <%= @ticket.title.capitalize%></h1>
 <h3 align="center" >Status:</h3>
 <% if @ticket.status == 0%>
         <h4 class="text-primary">New</h4>
@@ -10,9 +10,15 @@
 <%else%>
     <h4 class="text-success">Completed</h4>
 <%end%>
+<hr/>
+<%if @ticket.image_url.present? %>
+                <div class="my-5">
+                 <%= image_tag @ticket.image_url.custom.url%>
+                </div>
+            <%end%>
 <div class="well col-md-8 col-md-offset-2" align="center"> 
     <h4 class="center description"><strong>Description:</strong></h4>
-    <hr/>
+    
     <%= @ticket.description %>
     <%# <% if @recipe.ingredients.any? %>
         <%# <>Ingredients: <%= render @recipe.ingredients %>
@@ -31,7 +37,7 @@
         </div>
    </p>
    <div class="recipe-actions" align="center">
-   <% if current_user == @ticket.user || current_user.user_type =="2"%>
+   <% if current_user == @ticket.user || @ticket.developer_id == current_user.id%>
    <br>
     <%= link_to "Edit this BUG", edit_ticket_path(@ticket), class: "btn btn-xs btn-warning"%>
     <br>

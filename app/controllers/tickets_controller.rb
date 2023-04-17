@@ -11,6 +11,8 @@ class TicketsController < ApplicationController
 
  def new
     @project=params[:id]
+    @pro=Project.find(params[:id].to_i)
+    # binding.pry
     if current_user.user_type=="1"
     @ticket = Ticket.new
     else
@@ -19,12 +21,16 @@ class TicketsController < ApplicationController
  end
 
  def create
+    @pro=Project.find(ticket_params[:project_id].to_i)
     @ticket = Ticket.new(ticket_params)
     @ticket.user_id=current_user.id
+    # binding.pry
         if @ticket.save
-          flash[:success] = "project was created successfully!"
+            # binding.pry
+          flash[:success] = "Bug was created successfully!"
           redirect_to ticket_path(@ticket)
         else
+            # binding.pry
           render 'new', status: 300
         end
 
@@ -55,6 +61,6 @@ end
 
  private
  def ticket_params
-     params.require(:ticket).permit(:title, :description, :category, :status, :deadline, :project_id, :user_id)
+     params.require(:ticket).permit(:title, :description, :category, :status, :deadline, :project_id, :user_id, :image_url, :developer_id)
  end
 end

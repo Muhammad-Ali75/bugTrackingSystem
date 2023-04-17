@@ -10,33 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_13_091054) do
-  create_table "bugs", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.date "deadline"
-    t.integer "project_id", null: false
-    t.integer "user_id", null: false
-    t.integer "developer_id"
-    t.string "type"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["developer_id"], name: "index_bugs_on_developer_id"
-    t.index ["project_id"], name: "index_bugs_on_project_id"
-    t.index ["user_id"], name: "index_bugs_on_user_id"
-  end
-
-  create_table "bugs1", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.date "deadline"
-    t.integer "type"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_04_14_103338) do
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -56,6 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_13_091054) do
     t.integer "category"
     t.integer "project_id"
     t.integer "user_id"
+    t.string "image_url"
+    t.integer "developer_id"
     t.index ["project_id"], name: "index_tickets_on_project_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
@@ -81,8 +57,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_13_091054) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "bugs", "projects"
-  add_foreign_key "bugs", "users"
-  add_foreign_key "bugs", "users", column: "developer_id"
   add_foreign_key "projects", "users"
 end

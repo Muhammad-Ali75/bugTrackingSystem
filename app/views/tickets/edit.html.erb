@@ -1,7 +1,9 @@
 <center>
 <h1 align="center">Edit Bug</h1>
 <hr>
-<div class="col-md-12">
+<%= render 'shared/errors', obj: @ticket %>
+
+<div class="col-md-12 w-50 p-3"">
     <%= form_for(@ticket, :html => {class:"form-horizontal", role: "form"}) do |f| %>
     <%if current_user.user_type == "1"%>
         <div class="form-group">
@@ -16,13 +18,28 @@
             <div class="control-label col-md-2">
                 <%= f.label :description %>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <%= f.text_area :description, rows: 10, class: "form-control", placeholder: "Enter description of bug" %>
             </div>
         </div>
         <br>
+         <div class="control-label col-md-2">
+                <%= f.label :image %>
+            </div>
+            <div class="col-md-10">
+                <%= f.file_field :image_url %> 
+            </div>
+            <%if @ticket.image_url.present? %>
+                <div class="my-5">
+                 <%= image_tag @ticket.image_url.custom.url%>
+                </div>
+            <%end%>
+        </div>
         <br>
-        
+        <%= f.label :developer_id %>
+        <%= f.select :developer_id, options_for_select(@ticket.project.users.where(user_type: "2").map { |dev| [dev.name, dev.id] }), {} %>
+        <br>
+        <br>
          <div class="control-label col-md-2">
                 <%= f.label :Deadline %>
             </div>
@@ -33,7 +50,8 @@
         <%end%>
         <%# <%= f.hidden_field :user_id, value: current_user.id %>
         
-        <% if current_user.user_type == "2" %>
+
+        <% if current_user.user_type == "2"%>
             <div class="form-group">  
                  <div class="control-label col-md-2">
                     <%= f.label :Status %>
