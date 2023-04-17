@@ -3,17 +3,21 @@ class TicketsController < ApplicationController
 
  def index
     @tickets= Project.find(params[:id]).tickets
+    authorize! :read, Ticket
     @project=params[:id]
     # binding.pry
  end
 
  def show
     @ticket= Ticket.find(params[:id])
+    authorize! :read, @ticket
+
  end
 
  def new
     @project=params[:id]
     @pro=Project.find(params[:id].to_i)
+    authorize! :create, Ticket
     # binding.pry
     if current_user.user_type=="1"
     @ticket = Ticket.new
@@ -25,6 +29,7 @@ class TicketsController < ApplicationController
  def create
     @pro=Project.find(ticket_params[:project_id].to_i)
     @ticket = Ticket.new(ticket_params)
+    authorize! :create, @ticket
     @ticket.user_id=current_user.id
     # binding.pry
         if @ticket.save
@@ -40,10 +45,13 @@ class TicketsController < ApplicationController
 
  def edit 
     @ticket=Ticket.find(params[:id])
+    authorize! :edit , @ticket
  end
 
  def update
     @ticket=Ticket.find(params[:id])
+    authorize! :edit , @ticket
+
     if @ticket.update(ticket_params)
         flash[:success] = "Ticket was updated successfully!"
         redirect_to ticket_path(@ticket)
@@ -56,6 +64,7 @@ end
  def destroy
         @ticket=Ticket.find(params[:id])
         @project=@ticket.project.id
+        authorize! :destroy, @ticket
         @ticket.destroy
         flash[:success] = "Project was updated successfully!"
         redirect_to tickets_path(id:@project)

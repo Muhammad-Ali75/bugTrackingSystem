@@ -14,8 +14,8 @@ class Ability
     # QA
     if user.user_type == "1"
       can [:read], Project, user_projects: { user_id: user.id }
-      can [:create], Ticket, project: { user_projects: { user_id: user.id } }
-      can [:edit, :destroy], Ticket, user_id: user.id
+      can [:create], Ticket
+      can [:read ,:edit, :destroy], Ticket, user_id: user.id
     end
 
     # Developer
