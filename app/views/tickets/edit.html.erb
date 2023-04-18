@@ -3,7 +3,7 @@
 <hr>
 <%= render 'shared/errors', obj: @ticket %>
 
-<div class="col-md-12 w-50 p-3"">
+<div class="col-md-12 w-50 p-3">
     <%= form_for(@ticket, :html => {class:"form-horizontal", role: "form"}) do |f| %>
     <%if current_user.user_type == "1"%>
         <div class="form-group">
@@ -23,12 +23,14 @@
             </div>
         </div>
         <br>
-         <div class="control-label col-md-2">
-                <%= f.label :image %>
+        <div class="form-group">  
+            <div class="control-label col-md-3">
+                <%= f.label :image, "Change Image" %>
             </div>
-            <div class="col-md-10">
-                <%= f.file_field :image_url %> 
+            <div class="col-md-12">
+                <%= f.file_field :image_url, class:"rounded md-8 form-control"  %> 
             </div>
+        </div>    
             <%if @ticket.image_url.present? %>
                 <div class="my-5">
                  <%= image_tag @ticket.image_url.custom.url%>
@@ -36,29 +38,33 @@
             <%end%>
         </div>
         <br>
-        <%= f.label :developer_id %>
-        <%= f.select :developer_id, options_for_select(@ticket.project.users.where(user_type: "2").map { |dev| [dev.name, dev.id] }), {} %>
-        <br>
-        <br>
-         <div class="control-label col-md-2">
-                <%= f.label :Deadline %>
+        <div class="form-group">
+            <div class="control-label col-md-3">
+                <%= f.label :developer_id, "Change Developer" %>
             </div>
-            <div class="col-md-10">
-                <%= f.date_field :deadline, "data-provide" => 'datepicker' %>
+            <div class="col-md-8">
+                <%= f.select :developer_id, options_for_select(@ticket.project.users.where(user_type: "2").map { |dev| [dev.name, dev.id] }), {}, class:"rounded md-8 form-control" %>
             </div>
         </div>
-        <%end%>
-        <%# <%= f.hidden_field :user_id, value: current_user.id %>
-        
+        <br>
+        <br>
+        <div class="form-group">
+            <div class="control-label col-md-3">
+                <%= f.label :Deadline, "Add Deadline" %>
+            </div>
+            <div class="col-md-8">
+                <%= f.date_field :deadline, "data-provide" => 'datepicker', class: "rounded md-8 form-control"%>
+            </div>
+        </div>
+        <%end%>        
 
         <% if current_user.user_type == "2"%>
             <div class="form-group">  
-                 <div class="control-label col-md-2">
-                    <%= f.label :Status %>
+                 <div class="control-label col-md-3">
+                    <%= f.label :Status, "Change Status" %>
                 </div>
-                <div class="col-md-10">
-                    <%# <%= f.select :status, collection: [[1, 'Started'], [2, 'Completed']], label_method: :second, value_method: :first %>
-                    <%= f.select :status, [['Started', 1], ['Completed', 2]] %>
+                <div class="col-md-12">
+                    <%= f.select :status, [['Started', 1], ['Completed', 2]], {}, class:"rounded md-8 form-control" %>
                 </div>
             </div>
         <%end%>

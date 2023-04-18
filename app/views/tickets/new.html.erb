@@ -3,15 +3,15 @@
 
 <hr>
 <%= render 'shared/errors', obj: @ticket %>
-<div class="col-md-12 w-50 p-3">
+<div class="col-md-12 w-25 p-3">
     <%= form_for(@ticket, :html => {class:"form-horizontal", role: "form"}) do |f| %>
         <div class="form-group">
             <div class="control-label col-md-2">
                 <%= f.label :title %>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <%= f.text_field :title, class: "form-control", placeholder: "Name of ticket", autofocus: true%>
-            <div>
+            </div>
         </div>
         <div class="form-group">
             <div class="control-label col-md-2">
@@ -21,39 +21,42 @@
                 <%= f.text_area :description, rows: 10, class: "form-control", placeholder: "Enter description of bug" %>
             </div>
         </div>
-        <div class="form-group">
         
         <div class="form-group">  
                  <div class="control-label col-md-2">
-                    <%= f.label :Type %>
+                    <%= f.label :Type, "Bug Type" %>
                 </div>
-                <div class="col-md-10">
-                    <%= f.select :category, [['Feature', 0], ['Bug', 1]] %>
+                <div class="col-md-12">
+                    <%= f.select :category, [['Feature', 0], ['Bug', 1]], {},class: "rounded md-8 form-control" %>
                 </div>
-            </div>
-        <br>
-        <div class="control-label col-md-2">
-                <%= f.label :image %>
-            </div>
-            <div class="col-md-10">
-                <%= f.file_field :image_url %> 
-            </div>
-            <%if @ticket.image_url.present? %>
-                <div class="my-5">
-                 <%= image_tag @ticket.image_url.url%>
-                </div>
-            <%end%>
         </div>
         <br>
-        <%= f.label :developer_id %>
-        <%= f.select :developer_id, options_for_select(@pro.users.where(user_type: "2").map { |devm| [devm.name, devm.id] }), {}%>
+         <div class="form-group">  
+                 <div class="control-label col-md-3">
+                     <%= f.label :image, "Choose Image" %>
+                </div>
+                <div class="col-md-12">
+                <%= f.file_field :image_url, class: 'rounded md-8 form-control' %> 
+                </div>
+        </div>
+       
         <br>
-        <br>
-         <div class="control-label col-md-2">
-                <%= f.label :Deadline %>
+        <div class="form-group">
+            <div class="control-label col-md-3">
+                <%= f.label :developer_id, "Choose Developer" %>
             </div>
-            <div class="col-md-10">
-                <%= f.date_field :deadline, "data-provide" => 'datepicker' %>
+            <div class="col-md-12">
+                <%= f.select :developer_id, options_for_select([["None", nil]] + @pro.users.where(user_type: "2").map { |devm| [devm.name, devm.id] }), {}, class: "multiselect rounded md-8 form-control" %>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="form-group">
+            <div class="control-label col-md-3">
+                <%= f.label :Deadline, "Add Deadline" %>
+            </div>
+            <div class="col-md-12">
+                <%= f.date_field :deadline, "data-provide" => 'datepicker', class: "rounded md-8 form-control"%>
             </div>
         </div>
         <%= f.hidden_field :project_id, value: @project %>

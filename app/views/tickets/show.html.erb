@@ -33,11 +33,11 @@
             <%= @ticket.user.email%>
         </small>
         <div class="pull-right">
-            Created: <%= time_ago_in_words(@ticket.created_at)%>
+            Created: <%= time_ago_in_words(@ticket.created_at) %> ago
         </div>
    </p>
    <div class="recipe-actions" align="center">
-   <% if current_user == @ticket.user || @ticket.developer_id == current_user.id%>
+   <% if current_user == @ticket.user || @ticket.developer_id == current_user.id || @ticket.developer_id == nil%>
    <br>
     <%= link_to "Edit this BUG", edit_ticket_path(@ticket), class: "btn btn-xs btn-warning"%>
     <br>
