@@ -21,8 +21,27 @@
 
             </div>
         </div>
-        <br>
+<br>
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                <%= f.label :Qa, "Add Q/A" %>
+            </div>
+            <div class="col-md-8">
+                <%= f.select :user_ids, options_from_collection_for_select(User.where(user_type: 1), :id, :name), {}, class: "multiselect rounded md-8 form-control", multiple: true %>
+            <div>
+        </div>
+<br>
 
+
+          <div class="form-group">
+            <div class="control-label col-md-3">
+                <%= f.label :developer, "Add Devloper" %>
+            </div>
+            <div class="col-md-14">
+                <%= f.select :user_ids, options_from_collection_for_select(User.where(user_type: 2), :id, :name), {}, class: "multiselect rounded md-8 form-control", multiple: true %>
+            <div>
+        </div>
+<br>
 <br>
 
 

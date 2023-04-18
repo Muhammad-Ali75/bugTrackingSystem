@@ -27,13 +27,10 @@
     <%= button_to "Delete this project", project_path(@project),  method: :delete, class: "btn btn-xs btn-danger"%>
     <%end%>
     <br>
-    <% if current_user%>
-    <%= link_to "Go to Bugs", tickets_path(id: @project.id), class: "btn btn-xs btn-warning"%>
-    <br>
-    <%end%>
-    <br>
     <%= link_to "Go Back", projects_path, class: "btn btn-xs btn-primary"%>
-
    </div>
+   <br>
+   <h5>Bug List</h5>
+   <%= render 'tickets/tickets', objects: @project.tickets %>
 </div>
 </center>

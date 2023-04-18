@@ -1,28 +1,31 @@
-<%  objects.each do |ticket|%>
-    <div class="row border border-info rounded w-25 p-3" style="margin-bottom: 10px">
-        <div class="col-md-2" style="background-color= #454545">
-            <section class="center">
+<div class="row rounded w-50 p-3" style="margin-bottom: 10px">
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Bug Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Created by</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% objects.each.with_index(1) do |ticket, i| %>   
+    <tr>
+      <th scope="row"><%= i%></th>
+      <td><%= link_to ticket.title, ticket_path(ticket)%></td>
+    <% if ticket.status == 0 %>
+        <td><b class="text-primary">New</b></td>
+    <% elsif ticket.status == 1 %>
+        <td><b class="text-warning">Started</b></td>
+    <% elsif ticket.status == 2 && ticket.category == 0 %>
+        <td><b class="text-success">Resolved</b></td>
+    <% else %>
+        <td><b class="text-success">Completed</b></td>
+    <% end %>
 
-            </section>    
-        </div>
-        <div class="col-md-8 well">
-            <h4><%= link_to ticket.title, ticket_path(ticket)%></h4>
-            <% if ticket.status == 0%>
-               <h6>Status:</h6><h6 class="text-primary">New</h6>
-            <% elsif ticket.status == 1 %>
-                <h6>Status:</h6><h6 class="text-warning">Started</h6>
-            <% elsif ticket.status == 2 and ticket.category = 0 %>
-                <h6>Status:</h6><h6 class="text-success">Resolved</h6>
-            <%else%>
-                <h6>Status:</h6><h6 class="text-success">Completed</h6>
-            <%end%>
-            <p>
-                <span class="quite">
-                    <small>Created <%= time_ago_in_words(ticket.created_at)%> ago
-                                    <%# <%= ticket.user.email.capitalize%> 
-                </span>
-            </p>
-        </div>
-    </div>
-    
+      <td><%= ticket.user.name.capitalize%></td>
+    </tr>
 <%end%>
+  </tbody>
+</table>
+</div>

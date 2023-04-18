@@ -1,20 +1,22 @@
-<%  objects.each do |project|%>
-    <div class="row border border-info rounded w-25 p-3" style="margin-bottom: 10px">
-        <div class="col-md-2" style="background-color= #454545">
-            <section class="center">
-
-            </section>    
-        </div>
-        <div class="col-md-8 well">
-            <h4><%= link_to project.name, project_path(project)%></h4>
-            <p><%= truncate(project.description, length: 150)%></p>
-            <p>
-                <span class="quite">
-                    <small>Created <%= time_ago_in_words(project.created_at)%> ago by 
-                                    <%= project.user.name.capitalize%>
-                </span>
-            </p>
-        </div>
-    </div>
-    
-<%end%>
+<div class="row rounded w-50 p-3" style="margin-bottom: 10px">
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Project Name</th>
+      <th scope="col">Bugs</th>
+      <th scope="col">Created by</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% objects.each.with_index(1) do |project, i| %>   
+    <tr>
+      <th scope="row"><%= i%></th>
+      <td><%= link_to project.name, project_path(project)%></td>
+      <td><%= project.tickets.count%></td>
+      <td><%= project.user.name.capitalize%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+</div>

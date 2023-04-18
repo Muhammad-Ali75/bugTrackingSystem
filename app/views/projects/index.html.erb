@@ -3,7 +3,7 @@
 <p style="color: green"><%= notice %></p>
 <center>
 <% if current_user.user_type == "manager" %>
-  <%= link_to "New project", new_project_path, class: "btn btn-outline-dark btn-lg"  %>   
+  <%= link_to "New project", new_project_path, class: "btn btn-dark btn-lg"  %>   
   <br>
   <br>
   <% if @projects.count != 0 %>
