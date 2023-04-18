@@ -2,9 +2,14 @@ class TicketsController < ApplicationController
 
 
  def index
+    if current_user.assigned_projects.map(&:id).include?(params[:id]) || Project.find(params[:id]).user_id == current_user.id
     @tickets= Project.find(params[:id]).tickets
     authorize! :read, Ticket
     @project=params[:id]
+    else
+        flash[:danger]="You are not allowed to view this page"
+        redirect_to root_path 
+    end
     # binding.pry
  end
 
