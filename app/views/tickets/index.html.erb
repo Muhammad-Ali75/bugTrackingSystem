@@ -12,7 +12,7 @@
       <% end %>
 <%end%>
 <% if current_user.user_type == "QA" %>
-    <%= link_to "Create Bug", new_ticket_path(id: @project), class: "btn btn-xs btn-primary"%>
+    <%= link_to "Create Bug", new_ticket_path(id: @project), class: "btn btn-outline-dark btn-lg"%>
     <br>
     <br>
   <% if @tickets.count != 0 %>

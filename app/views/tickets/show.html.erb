@@ -43,12 +43,9 @@
     <%end%>
     <br>
     <% if current_user.user_type != "maneger"%>
-    <%= link_to "Go to Bugs", tickets_path(id: @ticket.project.id), class: "btn btn-xs btn-warning"%>
+    <%= link_to "Go Back", tickets_path(id: @ticket.project.id), class: "btn btn-xs btn-primary"%>
     <br>
     <%end%>
-    <br>
-    <%= link_to "Go to Projects", projects_path, class: "btn btn-xs btn-primary"%>
-
    </div>
 </div>
 </center>

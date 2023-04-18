@@ -1,18 +1,21 @@
 <center>
+
 <div class="w-50 p-5 text-center bg-image rounded-3 center" style="
-    background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+    background-image: url('https://www.techslang.com/wp-content/uploads/2021/08/9359-e1629798707656.jpg');
     height: 400px;
   ">
   <div class="mask" >
     <div class="d-flex justify-content-center align-items-center">
       <div class="text-white">
-        <h1 class="mb-3">Welcome to Bug Tracking App</h1>
-        <h4 class="mb-3">The best Bug Tracking App!</h4>
+        <h1 class="mb-3 text-dark">Welcome to Bug Tracking</h1>
+        <br>
+        <h4 class="mb-3 text-muted">The best Bug Tracking App!</h4>
+        <br>
         <br>
         <br>
         <br>
         <% if !current_user%>
-        <%= link_to "LogIn", new_user_session_path, class: "btn btn-outline-light btn-lg" %>
+        <%= link_to "LogIn", new_user_session_path, class: "btn btn-dark btn-lg" %>
         <% end %>
       </div>
     </div>

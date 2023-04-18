@@ -2,7 +2,7 @@ class TicketsController < ApplicationController
 
 
  def index
-    if current_user.assigned_projects.map(&:id).include?(params[:id]) || Project.find(params[:id]).user_id == current_user.id
+    if  current_user.assigned_projects.map(&:id).include?(params[:id].to_i) || Project.find(params[:id].to_i).user_id == current_user.id
     @tickets= Project.find(params[:id]).tickets
     authorize! :read, Ticket
     @project=params[:id]
