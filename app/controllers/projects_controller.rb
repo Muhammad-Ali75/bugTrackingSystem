@@ -6,15 +6,15 @@ class ProjectsController < ApplicationController
     authorize! :read, Project
 
     if current_user
-        if current_user.user_type == "0"
+        if current_user.user_type == "manager"
             @projects = current_user.projects 
             
           end
-          if current_user.user_type == "1"
+          if current_user.user_type == "QA"
             @projects = current_user.assigned_projects 
 
           end
-          if current_user.user_type == "2"
+          if current_user.user_type == "Developer"
             @projects = current_user.assigned_projects 
 
           end

@@ -5,7 +5,7 @@
 
 <div class="col-md-12 w-50 p-3">
     <%= form_for(@ticket, :html => {class:"form-horizontal", role: "form"}) do |f| %>
-    <%if current_user.user_type == "1"%>
+    <%if current_user.user_type == "QA"%>
         <div class="form-group">
             <div class="control-label col-md-2">
                 <%= f.label :title %>
@@ -43,7 +43,7 @@
                 <%= f.label :developer_id, "Change Developer" %>
             </div>
             <div class="col-md-8">
-                <%= f.select :developer_id, options_for_select(@ticket.project.users.where(user_type: "2").map { |dev| [dev.name, dev.id] }), {}, class:"rounded md-8 form-control" %>
+                <%= f.select :developer_id, options_for_select(@ticket.project.users.where(user_type: 2).map { |dev| [dev.name, dev.id] }), {}, class:"rounded md-8 form-control" %>
             </div>
         </div>
         <br>
@@ -58,12 +58,12 @@
         </div>
         <%end%>        
 
-        <% if current_user.user_type == "2"%>
+        <% if current_user.user_type == "Developer"%>
             <div class="form-group">  
                  <div class="control-label col-md-3">
                     <%= f.label :Status, "Change Status" %>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <%= f.select :status, [['Started', 1], ['Completed', 2]], {}, class:"rounded md-8 form-control" %>
                 </div>
             </div>

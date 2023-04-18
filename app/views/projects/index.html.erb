@@ -2,48 +2,34 @@
 <hr>
 <p style="color: green"><%= notice %></p>
 <center>
-<% if current_user.user_type == "0" %>
+<% if current_user.user_type == "manager" %>
   <%= link_to "New project", new_project_path, class: "btn btn-outline-dark btn-lg"  %>   
   <br>
   <br>
- 
   <% if @projects.count != 0 %>
-<%= render "projects", objects: @projects %>
-
+    <%= render "projects", objects: @projects %>
   <% else %>
-      <p>You have not created any projects yet</p>
+    <p>You have not created any projects yet</p>
   <% end %>
+<% end %>
 
-
-
-  <% end %>
-
-<% if current_user.user_type == "1" %>
-
-  <h4>Your Assigned Project to Assure Quality</h4>
-
+<% if current_user.user_type == "QA" %>
   <% if @projects.count != 0 %>
-<%= render "projects", objects: @projects %>
-
+    <h4>Your Assigned Project to  Assure Quality</h4>
+    <%= render "projects", objects: @projects %>
   <% else %>
-      <p>You have not been assigned to any project to assure quality</p>
-
+    <p>You have not been assigned to any project to assure quality</p>
   <% end %>
+<% end %>
 
-  <% end %>
-
-<%  if current_user.user_type == "2"  %>
-
-<h4>Your Assigned Project to develop</h4>
-
+<%  if current_user.user_type == "Developer"  %>
   <% if @projects.count != 0 %>
-
-<%= render "projects", objects: @projects %>
+    <h4>Your Assigned Project to develop</h4>
+    <%= render "projects", objects: @projects %>
   <% else %>
       <p>You have not been assigned to any project to develop</p>
 
   <% end %>
-
 <% end %>
 
 </center>

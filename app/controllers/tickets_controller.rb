@@ -19,7 +19,7 @@ class TicketsController < ApplicationController
     @pro=Project.find(params[:id].to_i)
     authorize! :create, Ticket
     # binding.pry
-    if current_user.user_type=="1"
+    if current_user.user_type=="QA"
     @ticket = Ticket.new
     else
         redirect_to @root_path
@@ -53,7 +53,7 @@ class TicketsController < ApplicationController
     authorize! :edit , @ticket
 
     if @ticket.update(ticket_params)
-        flash[:success] = "Ticket was updated successfully!"
+        flash[:success] = "Bug was updated successfully!"
         redirect_to ticket_path(@ticket)
     else
         render 'edit'
@@ -66,7 +66,7 @@ end
         @project=@ticket.project.id
         authorize! :destroy, @ticket
         @ticket.destroy
-        flash[:success] = "Project was updated successfully!"
+        flash[:success] = "Bug was updated successfully!"
         redirect_to tickets_path(id:@project)
  end
 

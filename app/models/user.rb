@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  enum user_type: {manager: 0, QA: 1, Developer: 2}
   validates :user_type, presence: true
   validates :name, presence: true
 

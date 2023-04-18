@@ -21,7 +21,7 @@
 
   <%= f.input :user_type , 
                 as: :select, 
-                collection: [['0', 'Manager'], ['1', 'QA'], ['2', 'Developer']],
+                collection: [['manager', 'Manager'], ['QA', 'QA'], ['Developer', 'Developer']],
                 label_method: :second,
                 value_method: :first %>
   </div>
