@@ -6,6 +6,7 @@
       <th scope="col" class="text-center">#</th>
       <th scope="col" class="text-center">Bug Name</th>
       <th scope="col" class="text-center">Status</th>
+      <th scope="col" class="text-center">Type</th>
       <th scope="col" class="text-center">Created by</th>
     </tr>
   </thead>
@@ -23,7 +24,11 @@
     <% else %>
         <td class="text-center"><b class="text-success">Completed</b></td>
     <% end %>
-
+      <%if ticket.category == 0%>
+        <td class="text-center">Feature</td>
+      <%else%>
+        <td class="text-center">Bug</td>
+      <%end%>
       <td class="text-center"><%= ticket.user.name.capitalize%></td>
     </tr>
 <%end%>

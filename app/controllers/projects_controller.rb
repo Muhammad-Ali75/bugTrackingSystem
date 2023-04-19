@@ -6,9 +6,7 @@ class ProjectsController < ApplicationController
   def index
     authorize! :read, Project
     if current_user
-      @pagy, @projects = pagy(current_user.projects, items: 3) if current_user.user_type == 'manager'
-      @pagy, @projects = pagy(current_user.assigned_projects, items: 3) if current_user.user_type == 'QA'
-      @pagy, @projects = pagy(current_user.assigned_projects, items: 3) if current_user.user_type == 'Developer'
+      @pagy, @projects = pagy(related_project, items: 3)
     else
       redirect_to root_path
     end
@@ -39,7 +37,7 @@ class ProjectsController < ApplicationController
 
   def edit
     authorize! :edit, @project
-    @user = User.where.not(user_type: 0)
+    @users = @project.users
   end
 
   def update
@@ -68,5 +66,13 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:id])
+  end
+
+  def related_project
+    if current_user.manager?
+      current_user.projects
+    else
+      current_user.assigned_projects
+    end
   end
 end

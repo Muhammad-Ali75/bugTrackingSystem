@@ -36,7 +36,12 @@
         <br>
     <%end%>
     <h5>Bug List</h5>
-    <%= render 'tickets/tickets', objects: @tickets, pagy: @pagy %>
+    <br>
+    <%if @tickets.count == 0%>
+        <h6>No Bugs to show</h6>
+    <%else%>
+        <%= render 'tickets/tickets', objects: @tickets, pagy: @pagy %>
+    <%end%>
    
 </div>
 </center>
