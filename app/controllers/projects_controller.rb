@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   def index
     authorize! :read, Project
     if current_user
-      @pagy, @projects = pagy(related_project, items: 3)
+      @pagy, @projects = pagy(current_user.related_project, items: 3)
     else
       redirect_to root_path
     end
@@ -68,11 +68,11 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
-  def related_project
-    if current_user.manager?
-      current_user.projects
-    else
-      current_user.assigned_projects
-    end
-  end
+  # def related_project
+  #   if current_user.manager?
+  #     current_user.projects
+  #   else
+  #     current_user.assigned_projects
+  #   end
+  # end
 end

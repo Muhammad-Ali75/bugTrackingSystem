@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# user model
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -14,4 +15,12 @@ class User < ApplicationRecord
   has_many :assigned_projects, through: :user_projects, source: :project
 
   has_many :tickets
+
+  def related_project
+    if manager?
+      projects
+    else
+      assigned_projects
+    end
+  end
 end
