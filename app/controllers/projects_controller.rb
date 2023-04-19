@@ -3,11 +3,10 @@ class ProjectsController < ApplicationController
 
   def index
     authorize! :read, Project
-
     if current_user
-      @projects = current_user.projects if current_user.user_type == 'manager'
-      @projects = current_user.assigned_projects if current_user.user_type == 'QA'
-      @projects = current_user.assigned_projects if current_user.user_type == 'Developer'
+      @pagy, @projects = pagy(current_user.projects, items: 3) if current_user.user_type == 'manager'
+      @pagy, @projects = pagy(current_user.assigned_projects, items: 3) if current_user.user_type == 'QA'
+      @pagy, @projects = pagy(current_user.assigned_projects, items: 3) if current_user.user_type == 'Developer'
     else
       redirect_to root_path
     end
@@ -33,6 +32,7 @@ class ProjectsController < ApplicationController
 
   def show
     authorize! :read, @project
+    @pagy, @tickets = pagy(@project.tickets, items: 3)
   end
 
   def edit

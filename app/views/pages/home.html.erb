@@ -1,5 +1,6 @@
 <center>
-
+<br>
+<br>
 <div class="w-50 p-5 text-center bg-image rounded-3 center" style="
     background-image: url('https://www.techslang.com/wp-content/uploads/2021/08/9359-e1629798707656.jpg');
     height: 400px;
@@ -21,4 +22,15 @@
     </div>
   </div>
 </div>
+<% if current_user %>
+  <%if current_user.user_type != "manager" %>
+<br>
+<br>
+  <%= link_to "Show Assigned Projects", projects_path, class: "btn btn-dark btn-lg" %>
+<%else%>
+<br>
+<br>
+  <%= link_to "Show Projects", projects_path, class: "btn btn-dark btn-lg" %>
+  <%end%>
+<%end%>
 </center>

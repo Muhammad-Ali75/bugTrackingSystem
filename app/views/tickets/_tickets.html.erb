@@ -1,31 +1,38 @@
 <div class="row rounded w-50 p-3" style="margin-bottom: 10px">
-<table class="table table-dark">
+<table class="table table-borderless table-hover table-striped">
+ <caption>List of bugs</caption>
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Bug Name</th>
-      <th scope="col">Status</th>
-      <th scope="col">Created by</th>
+      <th scope="col" class="text-center">#</th>
+      <th scope="col" class="text-center">Bug Name</th>
+      <th scope="col" class="text-center">Status</th>
+      <th scope="col" class="text-center">Created by</th>
     </tr>
   </thead>
   <tbody>
   <% objects.each.with_index(1) do |ticket, i| %>   
     <tr>
-      <th scope="row"><%= i%></th>
-      <td><%= link_to ticket.title, ticket_path(ticket)%></td>
+      <th scope="row" class="text-center"><%= i%></th>
+      <td class="text-center"><%= link_to ticket.title, ticket_path(ticket)%></td>
     <% if ticket.status == 0 %>
-        <td><b class="text-primary">New</b></td>
+        <td class="text-center"><b class="text-primary">New</b></td>
     <% elsif ticket.status == 1 %>
-        <td><b class="text-warning">Started</b></td>
+        <td class="text-center"><b class="text-warning">Started</b></td>
     <% elsif ticket.status == 2 && ticket.category == 0 %>
-        <td><b class="text-success">Resolved</b></td>
+        <td class="text-center"><b class="text-success">Resolved</b></td>
     <% else %>
-        <td><b class="text-success">Completed</b></td>
+        <td class="text-center"><b class="text-success">Completed</b></td>
     <% end %>
 
-      <td><%= ticket.user.name.capitalize%></td>
+      <td class="text-center"><%= ticket.user.name.capitalize%></td>
     </tr>
 <%end%>
   </tbody>
 </table>
+<%== pagy_info(pagy)%> 
+<br>
+<br>
+  <div class="d-flex flex-row justify-content-center">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
 </div>

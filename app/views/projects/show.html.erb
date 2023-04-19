@@ -30,7 +30,13 @@
     <%= link_to "Go Back", projects_path, class: "btn btn-xs btn-primary"%>
    </div>
    <br>
-   <h5>Bug List</h5>
-   <%= render 'tickets/tickets', objects: @project.tickets %>
+   <% if current_user.user_type == "QA" %>
+        <%= link_to "Create Bug", new_ticket_path(id: @project), class: "btn btn-outline-dark btn-lg"%>
+        <br>
+        <br>
+    <%end%>
+    <h5>Bug List</h5>
+    <%= render 'tickets/tickets', objects: @tickets, pagy: @pagy %>
+   
 </div>
 </center>

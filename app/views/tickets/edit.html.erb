@@ -6,6 +6,8 @@
 <div class="col-md-12 w-50 p-3">
     <%= form_for(@ticket, :html => {class:"form-horizontal", role: "form"}) do |f| %>
     <%if current_user.user_type == "QA"%>
+        <%= f.hidden_field :status, value: 0%>
+
         <div class="form-group">
             <div class="control-label col-md-2">
                 <%= f.label :title %>

@@ -43,7 +43,7 @@
     <%end%>
     <br>
     <% if current_user.user_type != "maneger"%>
-    <%= link_to "Go Back", tickets_path(id: @ticket.project.id), class: "btn btn-xs btn-primary"%>
+    <%= link_to "Go Back", project_path(@ticket.project), class: "btn btn-xs btn-primary"%>
     <br>
     <%end%>
    </div>

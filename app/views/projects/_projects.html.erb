@@ -1,22 +1,29 @@
-<div class="row rounded w-50 p-3" style="margin-bottom: 10px">
-<table class="table table-dark">
+<div class="row rounded w-50 p-3">
+<table class="table table-borderless table-hover table-striped">
+ <caption>List of projects</caption>
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Project Name</th>
-      <th scope="col">Bugs</th>
-      <th scope="col">Created by</th>
+      <th scope="col" class="text-center">#</th>
+      <th scope="col" class="text-center">Project Name</th>
+      <th scope="col" class="text-center">No. of Bugs</th>
+      <th scope="col" class="text-center">Created by</th>
     </tr>
   </thead>
   <tbody>
   <% objects.each.with_index(1) do |project, i| %>   
     <tr>
-      <th scope="row"><%= i%></th>
-      <td><%= link_to project.name, project_path(project)%></td>
-      <td><%= project.tickets.count%></td>
-      <td><%= project.user.name.capitalize%></td>
+      <th scope="row" class="text-center"><%= i%></th>
+      <td class="text-center"><%= link_to project.name, project_path(project)%></td>
+      <td class="text-center"><%= project.tickets.count%></td>
+      <td class="text-center"><%= project.user.name.capitalize%></td>
     </tr>
     <%end%>
   </tbody>
 </table>
+  <%== pagy_info(pagy)%> 
+  <br>
+  <br>
+  <div class="d-flex flex-row justify-content-center">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
 </div>

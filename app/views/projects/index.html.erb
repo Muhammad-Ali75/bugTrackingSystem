@@ -7,7 +7,7 @@
   <br>
   <br>
   <% if @projects.count != 0 %>
-    <%= render "projects", objects: @projects %>
+    <%= render "projects", objects: @projects, pagy: @pagy %>
   <% else %>
     <p>You have not created any projects yet</p>
   <% end %>
@@ -16,7 +16,7 @@
 <% if current_user.user_type == "QA" %>
   <% if @projects.count != 0 %>
     <h4>Your Assigned Project to  Assure Quality</h4>
-    <%= render "projects", objects: @projects %>
+    <%= render "projects", objects: @projects, pagy: @pagy %>
   <% else %>
     <p>You have not been assigned to any project to assure quality</p>
   <% end %>
@@ -25,7 +25,7 @@
 <%  if current_user.user_type == "Developer"  %>
   <% if @projects.count != 0 %>
     <h4>Your Assigned Project to develop</h4>
-    <%= render "projects", objects: @projects %>
+    <%= render "projects", objects: @projects, pagy: @pagy %>
   <% else %>
       <p>You have not been assigned to any project to develop</p>
 
