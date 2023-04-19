@@ -1,14 +1,18 @@
+# frozen_string_literal: true
+
+# Ticket class
 class TicketsController < ApplicationController
-  def index
-    if current_user.assigned_projects.map(&:id).include?(params[:id].to_i) || Project.find(params[:id].to_i).user_id == current_user.id
-      @tickets = Project.find(params[:id]).tickets
-      authorize! :read, Ticket
-      @project = params[:id]
-    else
-      flash[:danger] = 'You are not allowed to view this page'
-      redirect_to root_path
-    end
-  end
+  # def index
+  #   if current_user.assigned_projects.map(&:id).include?(params[:id].to_i)
+  # || Project.find(params[:id].to_i).user_id == current_user.id
+  #     @tickets = Project.find(params[:id]).tickets
+  #     authorize! :read, Ticket
+  #     @project = params[:id]
+  #   else
+  #     flash[:danger] = 'You are not allowed to view this page'
+  #     redirect_to root_path
+  #   end
+  # end
 
   def show
     @ticket = Ticket.find(params[:id])

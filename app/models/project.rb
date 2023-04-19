@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Project < ApplicationRecord
   validates :name, presence: true
 
@@ -7,4 +9,3 @@ class Project < ApplicationRecord
   has_many :users, through: :user_projects
   has_many :tickets
 end
-  

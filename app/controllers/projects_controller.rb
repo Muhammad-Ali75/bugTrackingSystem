@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
+# Project class
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
-
   def index
     authorize! :read, Project
     if current_user
@@ -32,11 +34,12 @@ class ProjectsController < ApplicationController
 
   def show
     authorize! :read, @project
-    @pagy, @tickets = pagy(@project.tickets, items: 3)
+    @pagy, @tickets = pagy(@project.tickets, items: 5)
   end
 
   def edit
     authorize! :edit, @project
+    @user = User.where.not(user_type: 0)
   end
 
   def update
